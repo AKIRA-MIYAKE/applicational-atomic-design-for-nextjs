@@ -1,6 +1,10 @@
+import { VFC } from 'react'
+import { AppProps } from 'next/app'
+
+import 'tailwindcss/tailwind.css'
 import '../styles/globals.css'
 
-function MyApp({ Component, pageProps }) {
+const MyApp: VFC<AppProps> = ({ Component, pageProps }) => {
   return <Component {...pageProps} />
 }
 

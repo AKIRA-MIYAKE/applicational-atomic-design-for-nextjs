@@ -1,9 +1,9 @@
 import { NextPage } from 'next'
 
-import TasksListTemplate from '../templates/tasks/ListTemplate'
+import ReadTemplate from '../../../templates/tasks/ReadTemplate'
 
 const IndexPage: NextPage = () => {
-  return <TasksListTemplate />
+  return <ReadTemplate />
 }
 
 export default IndexPage
