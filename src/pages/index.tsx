@@ -1,9 +1,15 @@
 import { NextPage } from 'next'
 
-import TasksListTemplate from '../templates/tasks/ListTemplate'
+import PrivateRoot from '../components/PrivateRoot'
+
+import TaskListTemplate from '../templates/tasks/ListTemplate'
 
 const IndexPage: NextPage = () => {
-  return <TasksListTemplate />
+  return (
+    <PrivateRoot>
+      <TaskListTemplate />
+    </PrivateRoot>
+  )
 }
 
 export default IndexPage

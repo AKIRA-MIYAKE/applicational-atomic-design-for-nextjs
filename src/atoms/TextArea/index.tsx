@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, TextareaHTMLAttributes, forwardRef } from 'react'
 import clsx from 'clsx'
 
-import { focusClasses } from '../../styles'
+import { focusClasses } from '../../styles/class-values'
 
 export type TextAreaProps = DetailedHTMLProps<
   TextareaHTMLAttributes<HTMLTextAreaElement>,

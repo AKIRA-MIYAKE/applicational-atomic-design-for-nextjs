@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, InputHTMLAttributes, forwardRef } from 'react'
 import clsx from 'clsx'
 
-import { focusClasses } from '../../styles'
+import { focusClasses } from '../../styles/class-values'
 
 export type TextFieldProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,

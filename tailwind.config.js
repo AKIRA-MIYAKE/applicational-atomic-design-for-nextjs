@@ -11,6 +11,7 @@ module.exports = {
       borderColor: ['disabled'],
       opacity: ['disabled'],
       cursor: ['disabled'],
+      borderWidth: ['last'],
     },
   },
   plugins: [],

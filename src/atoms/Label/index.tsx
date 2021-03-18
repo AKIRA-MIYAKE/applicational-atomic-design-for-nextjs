@@ -16,6 +16,7 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>(
         {...props}
         ref={ref}
         className={clsx(
+          'text-sm',
           // sr-only
           srOnly && 'sr-only'
         )}

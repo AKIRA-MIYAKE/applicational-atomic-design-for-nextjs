@@ -1,7 +1,7 @@
-import { VFC } from 'react'
+import { VFC, useMemo } from 'react'
 import { UseFormMethods } from 'react-hook-form'
 
-import { Task, TaskStatus } from '../../../interfaces'
+import { TaskStatus } from '../../../interfaces'
 
 import Label from '../../../atoms/Label'
 import TextFiled from '../../../atoms/TextField'
@@ -11,47 +11,50 @@ import TaskStatusSelect from '../TaskStatusSelect'
 
 export interface TaskFormBodyProps {
   formId: string
-  useFormMethods: UseFormMethods<TaskFormBodyValues>
+  useFormMethods: UseFormMethods<TaskFormValues>
 }
 
-export interface TaskFormBodyValues {
+export interface TaskFormValues {
   name?: string
   description?: string
-  deadline?: Date
-  stats?: TaskStatus
+  deadline?: string
+  status?: TaskStatus
 }
 
 const TaskFormBody: VFC<TaskFormBodyProps> = ({ formId, useFormMethods }) => {
-  const inputIds = {
-    name: `${formId}_name`,
-    description: `${formId}_description`,
-    deadline: `${formId}_deadline`,
-    status: `${formId}_status`
-  }
+  const inputIds = useMemo(() => {
+    return {
+      name: `${formId}_name`,
+      description: `${formId}_description`,
+      deadline: `${formId}_deadline`,
+      status: `${formId}_status`,
+    }
+  }, [formId])
 
-  const { register } = useFormMethods
+  const { register, errors } = useFormMethods
 
   return (
     <div>
-      <div>
-        <div>
+      <div className="mb-3">
+        <div className="mb-1">
           <Label htmlFor={inputIds.name}>Name</Label>
         </div>
         <div>
           <TextFiled
             type="text"
-            name="title"
+            name="name"
             placeholder="Task name"
             id={inputIds.name}
             form={formId}
             block={true}
+            error={!!errors.name}
             ref={register({ required: true })}
           />
         </div>
       </div>
 
-      <div>
-        <div>
+      <div className="mb-3">
+        <div className="mb-1">
           <Label htmlFor={inputIds.description}>Description</Label>
         </div>
         <div>
@@ -62,13 +65,14 @@ const TaskFormBody: VFC<TaskFormBodyProps> = ({ formId, useFormMethods }) => {
             id={inputIds.description}
             form={formId}
             block={true}
+            error={!!errors.description}
             ref={register}
           />
         </div>
       </div>
 
-      <div>
-        <div>
+      <div className="mb-3">
+        <div className="mb-1">
           <Label htmlFor={inputIds.deadline}>Deadline</Label>
         </div>
         <div>
@@ -79,13 +83,14 @@ const TaskFormBody: VFC<TaskFormBodyProps> = ({ formId, useFormMethods }) => {
             id={inputIds.deadline}
             form={formId}
             block={true}
-            ref={register({ valueAsDate: true })}
+            error={!!errors.deadline}
+            ref={register({ pattern: /\d{4}-\d{2}-\d{2}/ })}
           />
         </div>
       </div>
 
       <div>
-        <div>
+        <div className="mb-1">
           <Label htmlFor={inputIds.status}>Status</Label>
         </div>
         <div>
@@ -94,6 +99,7 @@ const TaskFormBody: VFC<TaskFormBodyProps> = ({ formId, useFormMethods }) => {
             id={inputIds.status}
             form={formId}
             block={true}
+            error={!!errors.status}
             ref={register({ required: true })}
           />
         </div>

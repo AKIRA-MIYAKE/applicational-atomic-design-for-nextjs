@@ -8,7 +8,13 @@ export interface TaskStatusTextProps {
 
 const TaskStatusText: VFC<TaskStatusTextProps> = ({ status }) => {
   const text = useMemo(() => {
-    return Object.entries(TASK_STATUSES).find((kv) => kv[1] === status)[0]
+    const kv = Object.entries(TASK_STATUSES).find((kv) => kv[1] === status)
+
+    if (!kv) {
+      return 'Unknown'
+    }
+
+    return kv[0]
   }, [status])
 
   return <>{text}</>
