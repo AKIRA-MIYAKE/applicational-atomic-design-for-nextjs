@@ -1,34 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# applicational-atomic-design-for-nextjs
+This application is a sample with "Applicational Atomic Design" applied.  
+The working application is [here](https://applicational-atomic-design-for-nextjs.vercel.app/about).  
 
-## Getting Started
+## What is "Applicational Atomic Design" ?
+Based on the [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) proposed by Brad Frost, this methodology adds the perspective of application behavior and domain model.  
 
-First, run the development server:
+### Atoms
+The definition of this classification is the same as the original.  
+In this sample application, there are HTML tag wrapper components with project-specific styles applied.  
+If you are using a UI framework that provides these components, you will rarely create components that fall into this category.  
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### Molecules
+In addition to the original definition, I classify the following components here.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
++ Atoms wrapper component with application-specific information (For example, text or select that accepts a particular type or interface)
++ Components that should be encapsulated as the behavior of the application (such as a form to change a given entity value)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+I value the behavior of the application and its relationship to the domain model rather than the UI size of the component and its reusability.  
+Also, the important thing in this classification is not to refer to or change global values ​​such as context.  
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### Organisms
+Components that combine molecules and atoms to reference and update global values ​​and behave like widgets by themselves are categorized here.  
+The big difference from molecules is whether the component references and updates global values.  
+So components that just wrap molecules and connect to context, and small components that change global values, such as the SignOut button, are organisms.  
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Templates
+Similar to the original definition, the components that specifically place organisms and molecules are categorized, and in next.js and gatsby.js, they are the components that are injected with values ​​and rendered.  
+It is also responsible for giving some feedback to the user and transitioning the screen after the component of the organism makes changes to the global value.  
 
-## Learn More
+### Pages
+Components that give specific values ​​to templates and select templates to display according to the user's role.  
+The specific code for these components will vary depending on the framework you use.  
+If you are using next.js, it may be a group of files placed in the `pages` directory, and if you are using gatsby.js, it may be procedural code written in `gatsby-node.js`.  
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Components
+Components that do not fit into the above categories.  
+For example, a component that wraps a template component and controls the user's sign-in state and rendering and redirects from roles falls into this category.  
