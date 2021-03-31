@@ -6,8 +6,6 @@ import { useAuthContext } from '../../contexts/AuthContext'
 
 import { useIsBrowser } from '../../hooks/env'
 
-import LoadingTemplate from '../../templates/LoadingTemplate'
-
 export interface PrivateRootProps {
   children: ReactNode
   checkIsAccessible?: () => boolean
@@ -24,7 +22,7 @@ const PrivateRoot: VFC<PrivateRootProps> = ({
   const isBrowser = useIsBrowser()
 
   if (!isBrowser) {
-    return <LoadingTemplate />
+    return <>{children}</>
   }
 
   if (!isSignedIn) {
@@ -32,7 +30,7 @@ const PrivateRoot: VFC<PrivateRootProps> = ({
       router.asPath === '/' ? '/signin' : `/signin?redirect=${router.asPath}`
 
     router.push(signInUrl)
-    return <LoadingTemplate />
+    return <>{children}</>
   }
 
   if (checkIsAccessible) {
